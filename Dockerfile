@@ -86,7 +86,7 @@ RUN \
  rm -f /etc/nginx/conf.d/default.conf && \
  sed -i \
 	's|include /config/nginx/site-confs/\*;|include /config/nginx/site-confs/\*;\n\t#Removed lua. Do not remove this comment|g' \
-	/defaults/nginx.conf
+	/defaults/nginx.conf && \
  echo "**** remove unnecessary fail2ban filters ****" && \
  rm \
   /etc/fail2ban/jail.d/alpine-ssh.conf && \
