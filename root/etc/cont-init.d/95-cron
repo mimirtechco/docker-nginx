@@ -10,7 +10,7 @@ if [ ! -f /usr/sbin/cron ] && \
 fi
 
 # make folders if not exist
-if [[ ! -d /config/crontabs ]] && \
+if [ ! -d /config/crontabs ] && \
   mkdir -p /config/crontabs
 fi
 
