@@ -22,12 +22,23 @@ crontab -l -u root; then
 	crontab -l -u root > /config/crontabs/root
 fi
 
+# if root crontabs still do not exist in config (were not copied from system)
+# copy root crontab from included defaults
+[[ ! -f /config/crontabs/root ]] && \
+	cp /crontabs/root /config/crontabs/
+
 # if user crontabs do not exist in config
 # copy user crontab from system
 if [[ ! -f /config/crontabs/user ]] && \
 crontab -l -u abc; then
 	crontab -l -u abc > /config/crontabs/user
 fi
+
+# if user crontabs still do not exist in config (were not copied from system)
+# copy user crontab from included defaults
+[[ ! -f /config/crontabs/user ]] && \
+	cp /crontabs/user /config/crontabs/
+
 
 # import user crontabs
 crontab -u root /config/crontabs/root
