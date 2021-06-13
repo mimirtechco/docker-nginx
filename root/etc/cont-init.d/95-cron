@@ -25,7 +25,7 @@ fi
 # if root crontabs still do not exist in config (were not copied from system)
 # copy root crontab from included defaults
 [[ ! -f /config/crontabs/root ]] && \
-	cp /etc/crontabs/root /config/crontabs/
+	cp /defaults/crontabs/root /config/crontabs/
 
 # if user crontabs do not exist in config
 # copy user crontab from system
@@ -37,7 +37,7 @@ fi
 # if user crontabs still do not exist in config (were not copied from system)
 # copy user crontab from included defaults
 [[ ! -f /config/crontabs/user ]] && \
-	cp /etc/crontabs/user /config/crontabs/
+	cp /defaults/crontabs/user /config/crontabs/
 
 
 # import user crontabs
