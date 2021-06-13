@@ -19,6 +19,8 @@ RUN \
 	&& awk '/^P:nginx$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
  fi && \
  apk add --no-cache --upgrade \
+  gnupg \
+  fail2ban \
 	memcached \
 	nginx==${NGINX_VERSION} \
 	nginx-mod-http-brotli==${NGINX_VERSION} \
@@ -85,6 +87,13 @@ RUN \
  sed -i \
 	's|include /config/nginx/site-confs/\*;|include /config/nginx/site-confs/\*;\n\t#Removed lua. Do not remove this comment|g' \
 	/defaults/nginx.conf
+ echo "**** remove unnecessary fail2ban filters ****" && \
+ rm \
+  /etc/fail2ban/jail.d/alpine-ssh.conf && \
+ echo "**** copy fail2ban default action and filter to /default ****" && \
+ mkdir -p /defaults/fail2ban && \
+ mv /etc/fail2ban/action.d /defaults/fail2ban/ && \
+ mv /etc/fail2ban/filter.d /defaults/fail2ban/ && \
 
 # add local files
 COPY root/ /
